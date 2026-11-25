@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 2 — Профиль пользователя (Cookies + SSI)</title>
+    <!-- SSI-команда #echo вставляет строку запроса QUERY_STRING (например, level=expert) в тег META для установки cookie -->
+    <META HTTP-EQUIV="Set-Cookie" CONTENT="<!--#echo var="QUERY_STRING" -->; expires=Fri, 31 Dec 2027 23:59:59 GMT; path=/">
+    <script>
+        // Резервная установка cookie через JS из URL-параметра для современных браузеров
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var lvl = params.get('level');
+            if (lvl === 'novice' || lvl === 'middle' || lvl === 'expert') {
+                document.cookie = 'level=' + lvl + '; expires=Fri, 31 Dec 2027 23:59:59 GMT; path=/';
+            }
+        })();
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+        .msg { padding: 16px; border-radius: 8px; background: #ecfdf5; border-left: 4px solid #059669; margin: 16px 0; font-size: 1.15rem; }
+    </style>
+</head>
+<body>
+    <h1>Задание 2: Определение статуса пользователя по Cookie</h1>
+
+    <div class="msg">
+        <!-- SSI-команда #if проверяет наличие в HTTP_COOKIE значения level=novice -->
+        <!--#if expr="$HTTP_COOKIE = /level=novice/" -->
+            На сайт зашёл: <strong>Новичок</strong>.
+        <!-- SSI-команда #elif проверяет альтернативное условие: level=middle -->
+        <!--#elif expr="$HTTP_COOKIE = /level=middle/" -->
+            На сайт зашёл: <strong>Средний пользователь</strong>.
+        <!-- SSI-команда #elif проверяет альтернативное условие: level=expert -->
+        <!--#elif expr="$HTTP_COOKIE = /level=expert/" -->
+            На сайт зашёл: <strong>Опытный пользователь</strong>.
+        <!-- SSI-команда #else выполняется, если cookie ещё не передан браузером -->
+        <!--#else -->
+            Статус ещё не получен из Cookie. Если вы только что зарегистрировались, обновите эту страницу.
+        <!-- SSI-команда #endif завершает условную конструкцию -->
+        <!--#endif -->
+    </div>
+
+    <p><strong>Строка GET-запроса (QUERY_STRING):</strong>
+        <!-- SSI-команда #echo выводит параметры GET-запроса -->
+        <code><!--#echo var="QUERY_STRING" --></code>
+    </p>
+    <p><strong>Текущие cookies (HTTP_COOKIE):</strong>
+        <!-- SSI-команда #echo выводит все переданные браузером cookies -->
+        <code><!--#echo var="HTTP_COOKIE" --></code>
+    </p>
+
+    <p>
+        <a href="task2_profile.shtml">Обновить страницу (проверить Cookie без GET)</a> |
+        <a href="task2_register.shtml">Изменить регистрацию</a> |
+        <a href="index.shtml">На главную</a>
+    </p>
+
+    <!-- Задание 3: Кнопка обнуления cookies -->
+    <form action="task3_reset.shtml" method="GET" style="margin-top: 20px;">
+        <input type="submit" value="Обнулить Cookies">
+    </form>
+</body>
+</html>

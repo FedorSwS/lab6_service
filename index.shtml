@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная работа №6 — Использование Cookies (SSI)</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+        .card { border: 1px solid #d1d5db; border-radius: 8px; padding: 18px 22px; margin-bottom: 16px; background: #f9fafb; }
+        a.btn { display: inline-block; padding: 8px 14px; background: #1e3a5f; color: #fff; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Лабораторная работа №6: Использование Cookies и SSI</h1>
+    <p>Текущие cookies, полученные сервером от браузера:
+        <!-- Директива SSI #echo выводит значение переменной окружения HTTP_COOKIE -->
+        <code><!--#echo var="HTTP_COOKIE" --></code>
+    </p>
+
+    <div class="card">
+        <h2>Задание 1 — Приветствие посетителя</h2>
+        <p>Распознавание повторного визита с помощью Cookie и директивы SSI <code>#if</code>.</p>
+        <a class="btn" href="task1_visit.shtml">Открыть Задание 1</a>
+    </div>
+
+    <div class="card">
+        <h2>Задание 2 — Регистрация уровня пользователя</h2>
+        <p>Форма выбора уровня (новичок, средний, опытный), передача через GET и сохранение в Cookie.</p>
+        <a class="btn" href="task2_register.shtml">Открыть Задание 2</a>
+    </div>
+
+    <div class="card">
+        <h2>Задание 3 — Обнуление Cookies</h2>
+        <p>Удаление установленных cookies через просроченную дату <code>expires</code>.</p>
+        <form action="task3_reset.shtml" method="GET">
+            <input type="submit" value="Обнулить все Cookies">
+        </form>
+    </div>
+</body>
+</html>

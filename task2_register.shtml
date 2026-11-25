@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 2 — Регистрация пользователя</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+        fieldset { padding: 16px 20px; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 16px; }
+        label { display: block; margin: 8px 0; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Задание 2: Регистрация уровня пользователя</h1>
+    <p>Выберите ваш уровень подготовки. Данные будут отправлены методом <strong>GET</strong> на вторую страницу для сохранения в Cookie.</p>
+
+    <form action="task2_profile.shtml" method="GET">
+        <fieldset>
+            <legend>Кем вы хотите зарегистрироваться?</legend>
+            <label>
+                <input type="radio" name="level" value="novice" checked>
+                Новичок
+            </label>
+            <label>
+                <input type="radio" name="level" value="middle">
+                Средний пользователь
+            </label>
+            <label>
+                <input type="radio" name="level" value="expert">
+                Опытный пользователь
+            </label>
+        </fieldset>
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+
+    <p style="margin-top: 20px;"><a href="index.shtml">На главную</a></p>
+</body>
+</html>

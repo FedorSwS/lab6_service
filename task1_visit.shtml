@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 1 — Распознавание посетителя (Cookies + SSI)</title>
+    <!-- Установка cookie через META-тег согласно методическим указаниям -->
+    <META HTTP-EQUIV="Set-Cookie" CONTENT="visitor=known; expires=Fri, 31 Dec 2027 23:59:59 GMT; path=/">
+    <script>
+        // Резервная установка cookie через JS для современных браузеров, игнорирующих META Set-Cookie
+        if (document.cookie.indexOf('visitor=known') === -1) {
+            document.cookie = 'visitor=known; expires=Fri, 31 Dec 2027 23:59:59 GMT; path=/';
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+        .msg { padding: 16px; border-radius: 8px; background: #eef4fa; border-left: 4px solid #1e3a5f; margin: 16px 0; font-size: 1.15rem; }
+    </style>
+</head>
+<body>
+    <h1>Задание 1: Узнавание посетителя</h1>
+
+    <div class="msg">
+        <!-- SSI-команда #if проверяет, содержится ли в заголовке HTTP_COOKIE строка visitor=known -->
+        <!--#if expr="$HTTP_COOKIE = /visitor=known/" -->
+            Вы снова зашли на сайт студента [Фамилия И.О.]!
+        <!-- SSI-команда #else задаёт ветку, если условие в #if не выполнилось (первый заход) -->
+        <!--#else -->
+            Я вас не знаю. Обновите страницу, чтобы сервер получил установленный cookie.
+        <!-- SSI-команда #endif завершает условный блок -->
+        <!--#endif -->
+    </div>
+
+    <p><strong>Переданные браузером cookies (HTTP_COOKIE):</strong>
+        <!-- SSI-команда #echo вставляет в HTML-документ текущее значение переменной окружения HTTP_COOKIE -->
+        <code><!--#echo var="HTTP_COOKIE" --></code>
+    </p>
+
+    <p>
+        <a href="task1_visit.shtml">Обновить страницу</a> |
+        <a href="index.shtml">На главную</a>
+    </p>
+
+    <!-- Задание 3: Кнопка обнуления cookies, оформленная через форму и кнопку submit -->
+    <form action="task3_reset.shtml" method="GET" style="margin-top: 20px;">
+        <input type="submit" value="Обнулить Cookies">
+    </form>
+</body>
+</html>

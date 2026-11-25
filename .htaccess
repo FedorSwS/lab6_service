@@ -1,0 +1,9 @@
+# Включение обработки SSI (Server Side Includes) в Apache HTTP Server / XAMPP
+Options +Includes
+AddType text/html .shtml
+AddOutputFilter INCLUDES .shtml
+
+# Включение классического синтаксиса выражений SSI (Apache 2.4) для совместимости с методичкой
+SSILegacyExprParser on
+
+DirectoryIndex index.shtml
